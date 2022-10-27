@@ -6,15 +6,34 @@ Developers frequently have to create interfaces that allow non-developers to eas
 Because this application won’t be deployed, you’ll also need to create a walkthrough video that demonstrates its functionality and all of the following acceptance criteria being met.
 ```
 
-### Link to Web App: 
-<!-- LINK TO DEPLOYMENT HERE -->
+<!-- Build a Node.js command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person using the [Inquirer package](https://www.npmjs.com/package/inquirer/v/8.2.4). Write a unit test for every part of your code and ensure that it passes each test using the [Jest testing package](https://jestjs.io/).
 
-### App Preview:
-<!-- Replace with path to screenshot   ![My Password Generator Screenshot](./Assets/MyPasswordGeneratorScreenShot.PNG "My Password Generator Screenshot") -->
+The application will be invoked by using the following command:
 
-## Notes
+```
+bash
+node index.js
+```
 
+The tests will be invoked by using the following command:
+
+```
+bash
+npm test
+```
+
+Because this application won’t be deployed, you’ll also need to provide a link to a walkthrough video that demonstrates its functionality.  -->
+
+
+
+
+<!-- ## Link to Video of App Demo: 
+
+[![Watch the Demo](https://img.youtube.com/vi/cYn3SDIv0MQ/maxresdefault.jpg)](https://www.youtube.com/watch?v=cYn3SDIv0MQ)
+[You can also check out this example of an index.html file generated with the app.](/utils/exGenIndex.html) -->
+<!-- ## Notes -->
 <!-- Use this area to add personal notes on implementation, etc -->
+
 
 ## User Story
 
@@ -46,9 +65,29 @@ WHEN I choose to update an employee role
 THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
 ```
 
-<!-- ## Resources Used 
+## Resources Used 
 
-Use this area to list referenced apis, etc -->
+### Technology
+- [Inquirer package](https://www.npmjs.com/package/inquirer/v/8.2.4)
+- [MySQL2 package](https://www.npmjs.com/package/mysql2)
+- [console.table package](https://www.npmjs.com/package/console.table)
+
+<!-- ### Icons
+- Manager Icon: [Briefcase by ainul muttaqin from the Noun Project](https://thenounproject.com/browse/icons/term/briefcase/)
+- Engineer Icon: [Engineer by Adrien Coquet from the Noun Project](https://thenounproject.com/browse/icons/term/engineer/)
+- Student Icon: [Student by Adrien Coquet from the Noun Project](https://thenounproject.com/browse/icons/term/student/) -->
+
+### Helpful Resources
+- [Use Inquirer.js to Create a Conversational CLI User Interface by Janne Kemppainen](https://pakstech.com/blog/inquirer-js/)
+- [Inquirer.js: A collection of common interactive command line user interfaces](https://www.npmjs.com/package/inquirer/v/8.2.4#prompt)
+- [How to use Inquirer.js by Mat Wilmot](https://javascript.plainenglish.io/how-to-inquirer-js-c10a4e05ef1f)
+- [How to use the Inquirer Node package by Jon Deavers](https://www.educative.io/answers/how-to-use-the-inquirer-node-package)
+
+
+
+
+
+
 
 
 <!-- 
