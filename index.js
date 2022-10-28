@@ -4,133 +4,150 @@ const inquirer = require("inquirer");
 // FOR CREATING FILES
 const fs = require("fs");
 // FOR EMPLOYEE CONSTRUCTOR
-const buildEmployee = require("./lib/builder");
+const determineAction = require("./lib/builder");
 
 
 // RUN ON LOAD -------------------------------------------------------------------
 var employeeArray = [];
-var formattedTeam   = `
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <!-- TAB TITLE -->
-    <title>My Project Team</title>
-
-    <!-- LINK RESET AND MAIN STYLESHEET -->
-    <link rel="stylesheet" href="./reset.css">
-    <link rel="stylesheet" href="./style.css">
-
-    <!-- LINK JQUERY SCRIPT -->
-    <script 
-      src="https://code.jquery.com/jquery-3.2.1.js"
-      integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-      crossorigin="anonymous">
-    </script>
-
-    <!-- LINK MAIN JAVASCRIPT -->
-    <script type="text/javascript" src="../src/web-script.js"></script>
-
-  </head>
-
-  <body>
-
-    <header>
-      <h1>My Team</h1>
-    </header>
-
-    <div class="card_div">
-`;
 
 
 // QUESTION ARRAYS ---------------------------------------------------------------
-// STARTER QUESTIONS FOR TEAM MANAGER
-const managerQuestions = [
-    {
-        type: "input",
-        name: "name",
-        message: "Let's put your team together!\n  Enter the name of your team manager: "
-    },
-    {
-        type: "input",
-        name: "id",
-        message: "Enter the employee ID: "
-    },
-    {
-        type: "input",
-        name: "email",
-        message: "Enter the employee email: "
-    },
-    {
-        type: "input",
-        name: "officeNumber",
-        message: "Enter the office number: ",
-    },
-    {
-        name: 'confirmNew',
-        message: 'Would you like to add another team member?\n  Type \"n\" if you are done building your team.',
-        type: 'confirm',
-        default: false
-    },
+// STARTER QUESTIONS ON LOAD
+// WHEN I start the application THEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
+const initQuestions = [
+  {
+    type: "list",
+    name: "action",
+    message: "Welcome to the Employee Tracker Application!\n  You can exit this menu at any time with Ctrl+C \n  What would you like to do?",
+    choices: [
+        "View all Departments",
+        "View all Roles",
+        "View all Employees",
+        "Add a Department",
+        "Add a Role",
+        "Add an Employee",
+        "Update an Employee Role",
+    ],
+    
+  },
 
-]
+  // WHEN I choose to add a department
+  // THEN I am prompted to enter the name of the department and that department is added to the database
+  {
+    type: "input",
+    name: "addDepartment.name",
+    message: "Okay! Enter the name of the new department: ",
 
-// EMPLOYEE QUESTIONS FOR ADDITIONAL TEAM MEMBERS
-const employeeQuestions = [
-    {
-        type: "list",
-        name: "role",
-        message: "Let's add a new employee!\n  You can exit this menu at any time with Ctrl+C \n  What role will this employee have?",
-        choices: [
-            "Engineer",
-            "Intern",
-        ],
-        
-    },
-    {
-        type: "input",
-        name: "name",
-        message: "Enter the employee name: "
-    },
-    {
-        type: "input",
-        name: "id",
-        message: "Enter the employee ID: "
-    },
-    {
-        type: "input",
-        name: "email",
-        message: "Enter the employee email: "
-    },
-    {
-        type: "input",
-        name: "gitHub",
-        message: "Enter the GitHub username: ",
+    when(answers) {
+        return answers.action === "Add a Department"
+    }
+  },
 
-        when(answers) {
-            return answers.role === "Engineer"
-        }
-    },
-    {
-        type: "input",
-        name: "school",
-        message: "Enter the school name: ",
+  // WHEN I choose to add a role
+  // THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
+  {
+    type: "input",
+    name: "addRole.name",
+    message: "Okay! Enter the name of the new role: ",
 
-        when(answers) {
-            return answers.role === "Intern"
-        }
-    },
-    {
-        name: 'confirmNew',
-        message: 'Would you like to add another team member?\n  Type \"n\" if you are done building your team.',
-        type: 'confirm',
-        default: false
-    },
+    when(answers) {
+        return answers.action === "Add a Role"
+    }
+  },
+  {
+    type: "input",
+    name: "addRole.salary",
+    message: "Enter the annual salary for the new role: ",
 
+    when(answers) {
+        return answers.action === "Add a Role"
+    }
+  },
+  {
+    type: "list",
+    name: "addRole.department",
+    message: "What department should this role be under?\n  Don't see the department you need? Restart the app and add a new department.",
+    choices: [
+      "test dept",
+    ],
+
+    when(answers) {
+        return answers.action === "Add a Role"
+    }
+  },
+
+  // WHEN I choose to add an employee
+  // THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+  {
+    type: "input",
+    name: "addEmployee.firstName",
+    message: "Okay! Enter the employee's first name: ",
+
+    when(answers) {
+        return answers.action === "Add an Employee"
+    }
+  },
+  {
+    type: "input",
+    name: "addEmployee.lastName",
+    message: "Enter the employee's last name: ",
+
+    when(answers) {
+        return answers.action === "Add an Employee"
+    }
+  },
+  {
+    type: "list",
+    name: "addEmployee.role",
+    message: "What role should this new employee have?\n  Don't see the role you need? Restart the app and add a new role.",
+    choices: [
+      "test role",
+    ],
+
+    when(answers) {
+        return answers.action === "Add an Employee"
+    }
+  },
+  {
+    type: "list",
+    name: "addEmployee.manager",
+    message: "Who is this new employee's manager?\n  Don't see the employee you need? Restart the app and add a new employee.",
+    choices: [
+      "test employee",
+    ],
+
+    when(answers) {
+        return answers.action === "Add an Employee"
+    }
+  },
+
+
+  // WHEN I choose to update an employee role
+  // THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
+  {
+    type: "list",
+    name: "updateEmployeeRole.employee",
+    message: "Okay! Which employee needs their role to be updated? ",
+    choices: [
+      "test employee",
+    ],
+
+    when(answers) {
+        return answers.action === "Update an Employee Role"
+    }
+  },
+  {
+    type: "list",
+    name: "updateEmployeeRole.newRole",
+    message: "What should their role be updated to? ",
+    choices: [
+      "test role",
+    ],
+
+    when(answers) {
+        return answers.action === "Update an Employee Role"
+    }
+  },
 ]
 
 
@@ -141,14 +158,14 @@ init();
 // INITIALIZE APP & TRIGGER Q's 
 function init() {
 
-    // ASK MANAGER QUESTION ARRAY
-    inquirer.prompt(managerQuestions)
+    // ASK QUESTION ARRAY
+    inquirer.prompt(initQuestions)
     .then((answers) => {
 
         console.log(answers);
 
-        // ADD TO EMPLOYEE OBJECT ARRAY
-        addToArray(answers);
+        // DETERMINE HOW TO USE DATA
+        parseAnswers(answers);
 
     })
     .catch((error) => {
@@ -161,42 +178,25 @@ function init() {
 
 }
 
-// TRIGGER EMPLOYEE QUESTION ARRAY
-function askEmployeeQs(prevAnswers) {
-
-    if (prevAnswers.confirmNew === true) {
-
-        // ASK QUESTIONS
-        inquirer.prompt(employeeQuestions)
-        .then((answers) => {
-
-            console.log(answers);
-
-            addToArray(answers);
-
-        })
-        .catch((error) => {
-            if (error.isTtyError) {
-                console.log("Your console environment is not supported!")
-            } else {
-                console.log(error)
-            }
-        });
-
-    } else {
-
-        console.log("Ready to generate html");
-        
-        formatEmployees();
-
-    }
-
-}
-
 
 // ADDITIONAL FUNCTIONS FOR PARSING DATA -----------------------------------------
-// CREATE EMPLOYEE OBJECT
-function addToArray(answers) {
+// DETERMINE ACTION NEEDED
+function parseAnswers(answers) {
+
+  // DETERMINE HOW TO USE DATA
+  determineAction(answers);
+
+  // "View all Departments",
+  // "View all Roles",
+  // "View all Employees",
+  // "Add a Department",
+  // "Add a Role",
+  // "Add an Employee",
+  // "Update an Employee Role",
+
+  if (answers.action = "View all Departments") {
+
+  }
 
     var newEmployee = buildEmployee(answers);
 
@@ -205,6 +205,16 @@ function addToArray(answers) {
     askEmployeeQs(answers);
 
 }
+
+
+
+
+
+
+
+
+
+
 
 // FORMAT FINAL THINGS
 function formatEmployees() {
@@ -344,26 +354,28 @@ function writeToFile(fileName, codeToPrint) {
 
 
 
-// // GIVEN a command-line application that accepts user input
-// // WHEN I am prompted for my team members and their information
-// // WHEN I start the application
-// // THEN I am prompted to enter the team manager’s name, employee ID, email address, and office number
-// // WHEN I enter the team manager’s name, employee ID, email address, and office number
-// // THEN I am presented with a menu with the option to add an engineer or an intern or to finish building my team
-// // WHEN I select the engineer option
-// // THEN I am prompted to enter the engineer’s name, ID, email, and GitHub username, and I am taken back to the menu
-// // WHEN I select the intern option
-// // THEN I am prompted to enter the intern’s name, ID, email, and school, and I am taken back to the menu
-// // WHEN I decide to finish building my team
+// GIVEN a command-line application that accepts user input
 
-// // THEN I exit the application, and the HTML is generated
+// WHEN I start the application
+// THEN I am presented with the following options: view all departments, view all roles, view all employees, add a department, add a role, add an employee, and update an employee role
 
-// // THEN an HTML file is generated that displays a nicely formatted team roster based on user input
+// WHEN I choose to view all departments
+// THEN I am presented with a formatted table showing department names and department ids
 
-// // WHEN I click on an email address in the HTML
-// // THEN my default email program opens and populates the TO field of the email with the address
+// WHEN I choose to view all roles
+// THEN I am presented with the job title, role id, the department that role belongs to, and the salary for that role
 
-// // WHEN I click on the GitHub username
-// // THEN that GitHub profile opens in a new tab
+// WHEN I choose to view all employees
+// THEN I am presented with a formatted table showing employee data, including employee ids, first names, last names, job titles, departments, salaries, and managers that the employees report to
 
+// WHEN I choose to add a department
+// THEN I am prompted to enter the name of the department and that department is added to the database
 
+// WHEN I choose to add a role
+// THEN I am prompted to enter the name, salary, and department for the role and that role is added to the database
+
+// WHEN I choose to add an employee
+// THEN I am prompted to enter the employee’s first name, last name, role, and manager, and that employee is added to the database
+
+// WHEN I choose to update an employee role
+// THEN I am prompted to select an employee to update and their new role and this information is updated in the database 
