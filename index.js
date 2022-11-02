@@ -165,7 +165,7 @@ function init() {
         console.log(answers);
 
         // DETERMINE HOW TO USE DATA
-        parseAnswers(answers);
+        determineAction(answers);
 
     })
     .catch((error) => {
@@ -180,165 +180,129 @@ function init() {
 
 
 // ADDITIONAL FUNCTIONS FOR PARSING DATA -----------------------------------------
-// DETERMINE ACTION NEEDED
-function parseAnswers(answers) {
-
-  // DETERMINE HOW TO USE DATA
-  determineAction(answers);
-
-  // "View all Departments",
-  // "View all Roles",
-  // "View all Employees",
-  // "Add a Department",
-  // "Add a Role",
-  // "Add an Employee",
-  // "Update an Employee Role",
-
-  if (answers.action = "View all Departments") {
-
-  }
-
-    var newEmployee = buildEmployee(answers);
-
-    employeeArray.push(newEmployee);
-
-    askEmployeeQs(answers);
-
-}
-
-
-
-
-
-
-
-
-
-
-
 // FORMAT FINAL THINGS
-function formatEmployees() {
+// function formatEmployees() {
 
-    for (let i = 0; i < employeeArray.length; i++) {
+//     for (let i = 0; i < employeeArray.length; i++) {
 
-        var prevFormattedTeam = formattedTeam;
-        var officeNum = employeeArray[i].officeNumber;
+//         var prevFormattedTeam = formattedTeam;
+//         var officeNum = employeeArray[i].officeNumber;
 
-        if (employeeArray[i].role === "Manager") {
+//         if (employeeArray[i].role === "Manager") {
 
-            var newCard = `
-            <div class="card">
-              <div class="card-header">
-                <h2>${employeeArray[i].name}</h2>
-                <div class="card-roleSect">
-                    <img class="roleIcon" src="../public/img/noun-briefcase-4224532.png" alt="Briefcase by Ainul Muttaqin from the NounProject.com">
-                    <h3>Manager</h3>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="card-info">
-                    <h4>ID: </h4>
-                    <p>${employeeArray[i].id}</p>
-                </div>
-                <div class="card-info">
-                    <h4>email: </h4>
-                    <a href="mailto: ${employeeArray[i].email}">${employeeArray[i].email}</a>
-                </div>
-                <div class="card-info">
-                    <h4>Office Number: </h4>
-                    <p>${officeNum}</p>
-                </div>
-              </div>
-            </div>`;
+//             var newCard = `
+//             <div class="card">
+//               <div class="card-header">
+//                 <h2>${employeeArray[i].name}</h2>
+//                 <div class="card-roleSect">
+//                     <img class="roleIcon" src="../public/img/noun-briefcase-4224532.png" alt="Briefcase by Ainul Muttaqin from the NounProject.com">
+//                     <h3>Manager</h3>
+//                 </div>
+//               </div>
+//               <div class="card-body">
+//                 <div class="card-info">
+//                     <h4>ID: </h4>
+//                     <p>${employeeArray[i].id}</p>
+//                 </div>
+//                 <div class="card-info">
+//                     <h4>email: </h4>
+//                     <a href="mailto: ${employeeArray[i].email}">${employeeArray[i].email}</a>
+//                 </div>
+//                 <div class="card-info">
+//                     <h4>Office Number: </h4>
+//                     <p>${officeNum}</p>
+//                 </div>
+//               </div>
+//             </div>`;
 
-            formattedTeam = prevFormattedTeam + newCard;
+//             formattedTeam = prevFormattedTeam + newCard;
 
-            // formattedTeam = prevFormattedTeam + "----------------\nEmployee role is "+ employeeArray[i].role +"\nEmployee name is "+ employeeArray[i].name + "\nEmployee ID is "+ employeeArray[i].id + "\nEmployee email is "+ employeeArray[i].email+ "\nOffice number is "+ employeeArray[i].officeNumber+"\n----------------\n\n\n";
+//             // formattedTeam = prevFormattedTeam + "----------------\nEmployee role is "+ employeeArray[i].role +"\nEmployee name is "+ employeeArray[i].name + "\nEmployee ID is "+ employeeArray[i].id + "\nEmployee email is "+ employeeArray[i].email+ "\nOffice number is "+ employeeArray[i].officeNumber+"\n----------------\n\n\n";
 
-        } else if (employeeArray[i].role === "Engineer") {
+//         } else if (employeeArray[i].role === "Engineer") {
 
-            var newCard = `      
-            <div class="card">
-              <div class="card-header">
-                <h2>${employeeArray[i].name}</h2>
-                <div class="card-roleSect">
-                  <img class="roleIcon" src="../public/img/noun-engineer-3120654.png" alt="Engineer by Adrien Coquet from the NounProject.com">
-                  <h3>Engineer</h3>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="card-info">
-                  <h4>ID: </h4>
-                  <p>${employeeArray[i].id}</p>
-                </div>
-                <div class="card-info">
-                  <h4>email: </h4>
-                  <a href="mailto: ${employeeArray[i].email}">${employeeArray[i].email}</a>
-                </div>
-                <div class="card-info">
-                  <h4>GitHub: </h4>
-                  <p>
-                    <a href="https://github.com/${employeeArray[i].gitHub}">${employeeArray[i].gitHub}</a>
-                  </p>
-                </div>
-              </div>
-            </div>`;
+//             var newCard = `      
+//             <div class="card">
+//               <div class="card-header">
+//                 <h2>${employeeArray[i].name}</h2>
+//                 <div class="card-roleSect">
+//                   <img class="roleIcon" src="../public/img/noun-engineer-3120654.png" alt="Engineer by Adrien Coquet from the NounProject.com">
+//                   <h3>Engineer</h3>
+//                 </div>
+//               </div>
+//               <div class="card-body">
+//                 <div class="card-info">
+//                   <h4>ID: </h4>
+//                   <p>${employeeArray[i].id}</p>
+//                 </div>
+//                 <div class="card-info">
+//                   <h4>email: </h4>
+//                   <a href="mailto: ${employeeArray[i].email}">${employeeArray[i].email}</a>
+//                 </div>
+//                 <div class="card-info">
+//                   <h4>GitHub: </h4>
+//                   <p>
+//                     <a href="https://github.com/${employeeArray[i].gitHub}">${employeeArray[i].gitHub}</a>
+//                   </p>
+//                 </div>
+//               </div>
+//             </div>`;
 
-          formattedTeam = prevFormattedTeam + newCard;
+//           formattedTeam = prevFormattedTeam + newCard;
 
-            // formattedTeam = prevFormattedTeam + "----------------\nEmployee role is "+ employeeArray[i].role +"\nEmployee name is "+ employeeArray[i].name + "\nEmployee ID is "+ employeeArray[i].id + "\nEmployee email is "+ employeeArray[i].email+ "\nGitHub is "+ employeeArray[i].gitHub+"\n----------------\n\n\n";
+//             // formattedTeam = prevFormattedTeam + "----------------\nEmployee role is "+ employeeArray[i].role +"\nEmployee name is "+ employeeArray[i].name + "\nEmployee ID is "+ employeeArray[i].id + "\nEmployee email is "+ employeeArray[i].email+ "\nGitHub is "+ employeeArray[i].gitHub+"\n----------------\n\n\n";
 
-        } else if (employeeArray[i].role === "Intern") {
+//         } else if (employeeArray[i].role === "Intern") {
 
-            var newCard = `
-            <div class="card">
-              <div class="card-header">
-                <h2>${employeeArray[i].name}</h2>
-                <div class="card-roleSect">
-                  <img class="roleIcon" src="../public/img/noun-student-3884139.png" alt="Student by Adrien Coquet from the NounProject.com">
-                  <h3>Intern</h3>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="card-info">
-                  <h4>ID: </h4>
-                  <p>${employeeArray[i].id}</p>
-                </div>
-                <div class="card-info">
-                  <h4>email: </h4>
-                  <a href="mailto: ${employeeArray[i].email}">${employeeArray[i].email}</a>
-                </div>
-                <div class="card-info">
-                  <h4>School: </h4>
-                  <p>${employeeArray[i].school}</p>
-                </div>
-              </div>
-            </div>`;
+//             var newCard = `
+//             <div class="card">
+//               <div class="card-header">
+//                 <h2>${employeeArray[i].name}</h2>
+//                 <div class="card-roleSect">
+//                   <img class="roleIcon" src="../public/img/noun-student-3884139.png" alt="Student by Adrien Coquet from the NounProject.com">
+//                   <h3>Intern</h3>
+//                 </div>
+//               </div>
+//               <div class="card-body">
+//                 <div class="card-info">
+//                   <h4>ID: </h4>
+//                   <p>${employeeArray[i].id}</p>
+//                 </div>
+//                 <div class="card-info">
+//                   <h4>email: </h4>
+//                   <a href="mailto: ${employeeArray[i].email}">${employeeArray[i].email}</a>
+//                 </div>
+//                 <div class="card-info">
+//                   <h4>School: </h4>
+//                   <p>${employeeArray[i].school}</p>
+//                 </div>
+//               </div>
+//             </div>`;
 
-            formattedTeam = prevFormattedTeam + newCard;
+//             formattedTeam = prevFormattedTeam + newCard;
 
-            // formattedTeam = prevFormattedTeam + "----------------\nEmployee role is "+ employeeArray[i].role +"\nEmployee name is "+ employeeArray[i].name + "\nEmployee ID is "+ employeeArray[i].id + "\nEmployee email is "+ employeeArray[i].email+ "\nSchool is "+ employeeArray[i].school+"\n----------------\n\n\n";
+//             // formattedTeam = prevFormattedTeam + "----------------\nEmployee role is "+ employeeArray[i].role +"\nEmployee name is "+ employeeArray[i].name + "\nEmployee ID is "+ employeeArray[i].id + "\nEmployee email is "+ employeeArray[i].email+ "\nSchool is "+ employeeArray[i].school+"\n----------------\n\n\n";
 
-        }
+//         }
 
-    };
+//     };
 
-    var endCode = `
+//     var endCode = `
 
-        </div>
+//         </div>
 
-        </body>
+//         </body>
     
-    </html>`;
+//     </html>`;
 
-    var codeToPrint = formattedTeam + endCode;
+//     var codeToPrint = formattedTeam + endCode;
 
-    // INIT FUNCTION FOR WRITING FILE
-    writeToFile("./dist/index.html", codeToPrint);
+//     // INIT FUNCTION FOR WRITING FILE
+//     writeToFile("./dist/index.html", codeToPrint);
 
-    // console.log(codeToPrint);
+//     // console.log(codeToPrint);
 
-}
+// }
 
 
 // WRITE README FILE -------------------------------------------------------------
@@ -347,7 +311,7 @@ function writeToFile(fileName, codeToPrint) {
     // console.log(data);
 
     fs.writeFile(fileName, codeToPrint, (err) =>
-      err ? console.log(err) : console.log('Successfully created html file!')
+      err ? console.log(err) : console.log('Successfully created file!')
     );
 
 }
