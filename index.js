@@ -5,10 +5,13 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 // FOR EMPLOYEE CONSTRUCTOR
 const determineAction = require("./lib/builder");
+// // deptArray ARRAY
+// const deptArray = require("../db/dept");
+// // roleArray ARRAY
+// const roleArray = require("../db/role");
+// // empArray ARRAY
+// const empArray  = require("../db/emp");
 
-
-// RUN ON LOAD -------------------------------------------------------------------
-var employeeArray = [];
 
 
 // QUESTION ARRAYS ---------------------------------------------------------------
@@ -64,12 +67,9 @@ const initQuestions = [
     }
   },
   {
-    type: "list",
+    type: "input",
     name: "addRole.department",
     message: "What department should this role be under?\n  Don't see the department you need? Restart the app and add a new department.",
-    choices: [
-      "test dept",
-    ],
 
     when(answers) {
         return answers.action === "Add a Role"
