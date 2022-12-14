@@ -3,6 +3,8 @@
 const inquirer = require("inquirer");
 const initQs = require("./lib/questions");
 
+const { deptData, addDept } = require('./lib/department');
+
 
 
 // RUN ON LOAD -------------------------------------------------------------------
@@ -42,7 +44,7 @@ function determineAction (answers) {
   // DISPLAY ALL DEPARTMENTS
   if (answers.action === "View all Departments") {
 
-      console.table();
+      console.table(deptData);
 
   // DISPLAY ALL ROLES
   } else if (answers.action === "View all Roles") {
@@ -57,10 +59,7 @@ function determineAction (answers) {
   // ADD A DEPARTMENT
   } else if (answers.action === "Add a Department") {
 
-      new Department
-
-
-
+    addDept(answers);
 
   // ADD A ROLE
   } else if (answers.action === "Add a Role") {
