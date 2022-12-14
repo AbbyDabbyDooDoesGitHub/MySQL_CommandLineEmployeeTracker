@@ -1,16 +1,9 @@
 // PACKAGES REQUIRED -------------------------------------------------------------
 // FOR IN TEMINAL QUESTIONS
 const inquirer = require("inquirer");
-// FOR CREATING FILES
-const fs = require("fs");
+
 // FOR EMPLOYEE CONSTRUCTOR
 const determineAction = require("./lib/builder");
-// // deptArray ARRAY
-// const deptArray = require("../db/dept");
-// // roleArray ARRAY
-// const roleArray = require("../db/role");
-// // empArray ARRAY
-// const empArray  = require("../db/emp");
 
 
 
