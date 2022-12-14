@@ -19,9 +19,7 @@ npm test
 Because this application won’t be deployed, you’ll also need to create a walkthrough video that demonstrates its functionality and all of the following acceptance criteria being met.
 
 ## Link to Video of App Demo: 
-
-<!--! [![Watch the Demo](https://img.youtube.com/vi/cYn3SDIv0MQ/maxresdefault.jpg)](https://www.youtube.com/watch?v=cYn3SDIv0MQ)
-[You can also check out this example of an index.html file generated with the app.](/utils/exGenIndex.html) -->
+[![Watch the Demo](https://img.youtube.com/vi/P9Qbbo-Q0ic/maxresdefault.jpg)](https://www.youtube.com/watch?v=P9Qbbo-Q0ic)
 
 <!-- ## Notes -->
 <!-- Use this area to add personal notes on implementation, etc -->
@@ -63,11 +61,6 @@ THEN I am prompted to select an employee to update and their new role and this i
 - [jQuery Library](https://jquery.com/)
 - [MySQL2 package](https://www.npmjs.com/package/mysql2)
 - [console.table package](https://www.npmjs.com/package/console.table)
-
-<!-- ### Icons
-- Manager Icon: [Briefcase by ainul muttaqin from the Noun Project](https://thenounproject.com/browse/icons/term/briefcase/)
-- Engineer Icon: [Engineer by Adrien Coquet from the Noun Project](https://thenounproject.com/browse/icons/term/engineer/)
-- Student Icon: [Student by Adrien Coquet from the Noun Project](https://thenounproject.com/browse/icons/term/student/) -->
 
 ### Helpful Resources
 - [Use Inquirer.js to Create a Conversational CLI User Interface by Janne Kemppainen](https://pakstech.com/blog/inquirer-js/)

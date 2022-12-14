@@ -4,7 +4,7 @@ const inquirer = require("inquirer");
 const initQs = require("./lib/questions");
 
 const { deptData, addDept } = require("./lib/department");
-const { empData, addEmp } = require("./lib/employee");
+const { empData, addEmp, updateEmpRole } = require("./lib/employee");
 const { roleData, addRole } = require("./lib/role");
 
 
@@ -73,9 +73,10 @@ function determineAction (answers) {
 
     addEmp(answers);
       
-  //! UPDATE EMPLOYEE ROLE
+  // UPDATE EMPLOYEE ROLE
   } else if (answers.action === "Update an Employee Role") {
       
+    updateEmpRole(answers);
 
   // ERROR
   } else {
