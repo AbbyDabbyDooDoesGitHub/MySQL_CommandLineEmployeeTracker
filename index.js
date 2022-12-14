@@ -5,6 +5,7 @@ const initQs = require("./lib/questions");
 
 const { deptData, addDept } = require("./lib/department");
 const { empData, addEmp } = require("./lib/employee");
+const { roleData, addRole } = require("./lib/role");
 
 
 
@@ -50,7 +51,7 @@ function determineAction (answers) {
   // DISPLAY ALL ROLES
   } else if (answers.action === "View all Roles") {
 
-    console.table();
+    console.table(roleData);
 
   // DISPLAY ALL EMPLOYEES
   } else if (answers.action === "View all Employees") {
@@ -65,6 +66,7 @@ function determineAction (answers) {
   // ADD A ROLE
   } else if (answers.action === "Add a Role") {
 
+    addRole(answers);
 
   // ADD AN EMPLOYEE
   } else if (answers.action === "Add an Employee") {
