@@ -3,7 +3,8 @@
 const inquirer = require("inquirer");
 const initQs = require("./lib/questions");
 
-const { deptData, addDept } = require('./lib/department');
+const { deptData, addDept } = require("./lib/department");
+const { empData, addEmp } = require("./lib/employee");
 
 
 
@@ -44,17 +45,17 @@ function determineAction (answers) {
   // DISPLAY ALL DEPARTMENTS
   if (answers.action === "View all Departments") {
 
-      console.table(deptData);
+    console.table(deptData);
 
   // DISPLAY ALL ROLES
   } else if (answers.action === "View all Roles") {
 
-      console.table();
+    console.table();
 
   // DISPLAY ALL EMPLOYEES
   } else if (answers.action === "View all Employees") {
 
-      console.table();
+    console.table(empData);
 
   // ADD A DEPARTMENT
   } else if (answers.action === "Add a Department") {
@@ -68,16 +69,15 @@ function determineAction (answers) {
   // ADD AN EMPLOYEE
   } else if (answers.action === "Add an Employee") {
 
-
+    addEmp(answers);
       
-  // UPDATE EMPLOYEE ROLE
+  //! UPDATE EMPLOYEE ROLE
   } else if (answers.action === "Update an Employee Role") {
       
 
   // ERROR
   } else {
-
-      console.log("ERROR! answers.action does not equal anything from the list. It is: " + answers.action);
+    console.log("ERROR! answers.action does not equal anything from the list. It is: " + answers.action);
   }
 
 }
