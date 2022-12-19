@@ -19,7 +19,7 @@ npm test
 Because this application won’t be deployed, you’ll also need to create a walkthrough video that demonstrates its functionality and all of the following acceptance criteria being met.
 
 ## Link to Video of App Demo: 
-[![Watch the Demo](https://img.youtube.com/vi/P9Qbbo-Q0ic/maxresdefault.jpg)](https://www.youtube.com/watch?v=P9Qbbo-Q0ic)
+[![Watch the Demo](https://img.youtube.com/vi/wUOJ5kWzAUY/maxresdefault.jpg)](https://www.youtube.com/watch?v=wUOJ5kWzAUY)
 
 <!-- ## Notes -->
 <!-- Use this area to add personal notes on implementation, etc -->
