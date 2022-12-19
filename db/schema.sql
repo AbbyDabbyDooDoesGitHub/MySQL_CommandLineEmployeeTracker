@@ -9,12 +9,10 @@ USE tracker_db;
 CREATE TABLE department (
 
     -- id: INT PRIMARY KEY
-    id INT NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- name: VARCHAR(30) to hold department name
-    name VARCHAR(30) NOT NULL,
-
-    PRIMARY KEY (id)
+    name VARCHAR(30) NOT NULL
 
 );
 
@@ -24,7 +22,7 @@ CREATE TABLE department (
 CREATE TABLE role (
 
     -- id: INT PRIMARY KEY
-    id INT NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- title: VARCHAR(30) to hold role title
     title VARCHAR(30) NOT NULL,
@@ -33,14 +31,10 @@ CREATE TABLE role (
     salary DECIMAL NOT NULL,
 
     -- department_id: INT to hold reference to department role belongs to
-    department_id INT,
+    department_id INT NOT NULL,
 
 
-    PRIMARY KEY (id),
-
-    FOREIGN KEY (department_id),
-    REFERENCES department(id),
-    ON DELETE SET NULL
+    CONSTRAINT department_id FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE
 
 );
 
@@ -50,7 +44,7 @@ CREATE TABLE role (
 CREATE TABLE employee (
 
     -- id: INT PRIMARY KEY
-    id INT NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 
     -- first_name: VARCHAR(30) to hold employee first name
     first_name VARCHAR(30) NOT NULL,
@@ -64,15 +58,8 @@ CREATE TABLE employee (
     -- manager_id: INT to hold reference to another employee that is the manager of the current employee (null if the employee has no manager)
     manager_id INT,
 
-
-    PRIMARY KEY (id),
-
-    FOREIGN KEY (role_id),
-    REFERENCES role(id),
-    ON DELETE SET NULL,
-
-    FOREIGN KEY (manager_id),
-    REFERENCES employee(id),
-    ON DELETE SET NULL
+    CONSTRAINT role_id FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE,
+    
+    CONSTRAINT manager_id FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE CASCADE
 
 );
