@@ -46,17 +46,17 @@ function determineAction (answers) {
   // DISPLAY ALL DEPARTMENTS
   if (answers.action === "View all Departments") {
 
-    console.table(deptData);
+    console.table(deptData());
 
   // DISPLAY ALL ROLES
   } else if (answers.action === "View all Roles") {
 
-    console.table(roleData);
+    console.table(roleData());
 
   // DISPLAY ALL EMPLOYEES
   } else if (answers.action === "View all Employees") {
 
-    console.table(empData);
+    console.table(empData());
 
   // ADD A DEPARTMENT
   } else if (answers.action === "Add a Department") {
